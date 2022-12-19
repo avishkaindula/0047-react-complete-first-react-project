@@ -1,9 +1,22 @@
+import { useState } from "react";
+
+import Modal from "./Modal";
+import Backdrop from "./Backdrop";
+
 function Todo(props) {
   // Function name should start with a capital letter.
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  // UseState always returns an array with two elements
+  // First element holds the value of the useState
+  // So "false" is the value of the current initial state.
+  // we can assign that value to modalIsOpen
+  // setModalIsOpen is a function that allows us to change that value.
+  // Whenever we call this state changing function, react will re-execute
+  // the component function which this state belongs and update what's
+  // rendered on the screen.
 
   function deleteHandler() {
-    console.log("Clicked!");
-    console.log(props.text);
+    setModalIsOpen(true);
   }
 
   return (
@@ -19,6 +32,14 @@ function Todo(props) {
           Delete
         </button>
       </div>
+      {/* {modalIsOpen ? <Modal /> : null} */}
+      {/* This is a ternary expression */}
+      {/* It means if modalIsOpen = true; then show <Modal /> */}
+      {/* else show nothing. (null) */}
+      {modalIsOpen && <Modal />}
+      {/* This means if modalIsOpen = true and Modal component exists, */}
+      {/* return the second value. */}
+      {modalIsOpen && <Backdrop />}
     </div>
   );
 }
