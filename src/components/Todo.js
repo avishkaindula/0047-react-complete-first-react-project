@@ -19,6 +19,10 @@ function Todo(props) {
     setModalIsOpen(true);
   }
 
+  function closeModalHandler() {
+    setModalIsOpen(false);
+  }
+
   return (
     <div className="card">
       <h2>{props.text}</h2>
@@ -36,10 +40,12 @@ function Todo(props) {
       {/* This is a ternary expression */}
       {/* It means if modalIsOpen = true; then show <Modal /> */}
       {/* else show nothing. (null) */}
-      {modalIsOpen && <Modal />}
+      {modalIsOpen && (
+        <Modal onCancel={closeModalHandler} onConfirm={closeModalHandler} />
+      )}
       {/* This means if modalIsOpen = true and Modal component exists, */}
       {/* return the second value. */}
-      {modalIsOpen && <Backdrop />}
+      {modalIsOpen && <Backdrop onCancel={closeModalHandler} />}
     </div>
   );
 }
